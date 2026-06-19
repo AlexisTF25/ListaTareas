@@ -1,22 +1,29 @@
 import React from "react";
 import {
-    Platform,
-    TouchableNativeFeedback,
-    TouchableOpacity,
-    View,
-    ViewStyle,
+  Platform,
+  StyleProp,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+  ViewStyle,
 } from "react-native";
 
 type Props = {
   children: React.ReactNode;
   onPress?: () => void;
-  style?: ViewStyle | ViewStyle[];
+  onPressIn?: () => void;
+  onPressOut?: () => void;
+  disabled?: boolean;
+  style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
 };
 
 export default function Touchable({
   children,
   onPress,
+  onPressIn,
+  onPressOut,
+  disabled,
   style,
   accessibilityLabel,
 }: Props) {
@@ -24,6 +31,9 @@ export default function Touchable({
     return (
       <TouchableNativeFeedback
         onPress={onPress}
+        onPressIn={onPressIn}
+        onPressOut={onPressOut}
+        disabled={disabled}
         background={TouchableNativeFeedback.Ripple(
           "rgba(255,255,255,0.3)",
           false,
@@ -38,6 +48,9 @@ export default function Touchable({
   return (
     <TouchableOpacity
       onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      disabled={disabled}
       style={style}
       accessibilityLabel={accessibilityLabel}
     >
